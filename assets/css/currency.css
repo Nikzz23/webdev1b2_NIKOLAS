@@ -1,0 +1,18 @@
+body {
+    background-color: #eff5f8;
+}
+
+.bclr {
+    background-color: #78a374;
+    color: white;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+.grid, .date {
+    font-family: 'Roboto', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.button {
+    background-color: #6392a7;
+}

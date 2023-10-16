@@ -1,0 +1,71 @@
+body {
+    background-color: black;
+}
+
+.box {
+    width: 140px;
+    height: 140px;
+    border-radius: 3%;
+}
+
+.box2 {
+    width: 200px;
+    height: 30px;    
+    border-color: aliceblue;
+    border: solid 1px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 150px;
+    font-size: 50px;
+}
+
+#c1{
+    background-color: aquamarine;
+}
+
+#c2 {
+    background-color: bisque;
+}
+
+#c3 {
+    background-color:crimson;
+}
+
+#c4 {
+    background-color: cadetblue;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px 100px;
+    grid-gap: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.m2 {
+    color: lightgray;
+    text-align: center;
+    margin-top: 100px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    padding: 10px;
+}
+
+#add {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: grey;
+}
+
+.manage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

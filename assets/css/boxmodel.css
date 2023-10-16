@@ -1,0 +1,25 @@
+#box1,
+#box2,
+#box3 {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    padding: 30px;
+    margin: auto;
+}
+
+#box1 {
+    padding: 10px 20px 30px 40px;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    border-top: 3px dashed gold;
+    
+}
+
+#box2 {
+    border-bottom-left-radius: 50%;
+    border-top-right-radius: 60%;
+    background-color: burlywood;
+    color: black;
+    margin-left: 150px;
+}

@@ -1,0 +1,87 @@
+.box {
+    width: 200px;
+    height: 200px;
+    border: 1px solid blue;
+    margin: 50px;
+}
+
+@keyframes animation1 {
+    /* from {background-color: yellowgreen;}
+    to {background-color: aqua;} */
+
+    0% { background-color: aliceblue; width: 25px }
+    25% { background-color: beige; width: 25px; }
+    50% { background-color: brown; width: 200px; }
+    75% { background-color: burlywood; width: 100px;}
+    100% { background-color: blueviolet; width: 200px;}
+}
+
+.animation1 {
+    animation-name: animation1;
+    animation-duration: 20s;
+    background-color: yellowgreen;
+    animation-iteration-count: infinite;
+}
+
+.transition {
+    background-color: coral;
+    transition: width 1s, transform 10s;
+}
+
+.transition:hover {
+    width: 350px;
+    transform: translateX(1100px);
+}
+
+.rotate-element {
+    transform: rotate(360deg) ;
+    background-color: aquamarine;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-name: rotate-element;
+}
+
+@keyframes rotate-element {
+    from { transform: rotate(0deg);}
+    to { transform: rotate(360deg);}
+}
+
+.scale-element {
+    /* transform: scale(1); */
+    background-color: aqua;
+    animation-name: scale-element;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes scale-element {
+    from { transform: scale(normal); }
+    to { transform: scale(2.5);}
+}
+
+.skew-element {
+    /* transform: skewX(30deg);
+    transform: skewY(20deg);  */
+    background-color: blanchedalmond;
+    animation-name: skew-element;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    transition: width 1s, transform 10s;
+}
+
+@keyframes skew-element {
+    0%, 100% {transform:translateX(0px) skew(30deg, 20deg);}
+    50% {transform: translateY(-300px) skew(30deg, 20deg);}
+}
+
+.translate-element {
+    transform: translate(50px, 20px);
+    /* transform: translateX(150px); */
+    /* transform: translateY(-150px); */
+    background-color: blueviolet;
+}
+
+.combined-transform {
+    transform: rotate(45deg) scale(1.5) skew(10deg, 5deg) translate(20px, 10px);
+    background-color: azure;
+}
