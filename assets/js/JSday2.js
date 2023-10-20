@@ -64,6 +64,13 @@ var personname = prompt('Please enter your name so ican address you')
 if (personname == 'Nikolas') {
     alert('Welcome to my site,'+ personname);
 } else {
-    alert('Only niks can enter here!')
+    alert('Only nikszz can enter here!')
 }
 
+for (var x = 0; x <= 10; x++) {
+    if (x % 2 == 0) {
+        console.log(x,'EVEN')
+    } else {
+        console.log(x,'ODD')
+    }
+}
