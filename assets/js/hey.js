@@ -14,12 +14,11 @@ var sum = x + y;
 var test = x + b
 var fullname = firstName + ' ' + lastname;
 var istrue= true;
-
 console.log(x, y);
 console.log(z);
 console.log(a);
 console.log(firstName);
-console.log('Nikolas')
+console.log('jon jon')
 console.log(sum);
 console.log(x + b);
 console.log()
@@ -64,6 +63,12 @@ if (lastname == 'jon') {
 }
 
 if (firstName == 'Nikolas' || lastname == 'jon') {
+    console.log('coach is in')
+} else {
+    console.log('coach is not in')
+}
+
+if (firstName == 'Niow' || lastname == 'hon') {
     console.log('coach is in')
 } else {
     console.log('coach is not in')
