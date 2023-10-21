@@ -65,3 +65,6 @@ if (foodIndex !== -1) {
 food = food.map(item => item.toUpperCase());
 
 console.log(food);
+
+
+///////
