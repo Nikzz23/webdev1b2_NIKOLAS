@@ -1,0 +1,39 @@
+/* 
+bck #1c293a 
+bts #354356
+nmb white
+othr kypds gray
+hvr bttn #6c62ff
+*/
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #1c293a;
+    display: flex;
+    height: 100%;
+}
+
+#calContainer {
+    border: 1px solid white;
+    width: 350px;
+}
+
+#calContent {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.buttonItem {
+    width: 70px;
+    height: 70px;
+    background-color: #354356;
+}
+
+.buttonItem:hover {
+    background-color: #6c62ff;
+}
