@@ -163,10 +163,10 @@ def delete_account():
         yrn = input(f"\t\tWould you like to proceed for deletion? (press y or n) "
                     f"\n\t\tAccount Number:{accNum} | Name: {account_info[accNum]['name']} | Balance: {float(sum(history_balance[accNum]['transaction']))}"
                     f"\n\t▶▶▶ ")
-        if yrn == 'y':
+        if yrn.lower() == 'y':
             print("\t\tSuccessfully deleted")
             account_info.pop(accNum)
-        elif yrn == 'n':
+        elif yrn.lower() == 'n':
             print("\t\tDiscarding deletion")
         else:
             print("\t\tInvalid command")
