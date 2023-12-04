@@ -1,0 +1,337 @@
+
+# I used a dictionary with nested list to store another dictionary values.
+# So that i can access and iterate them easily.
+# This is for the transaction history
+history = {"0002": [{'received':50.0, 'from': '0001'},{'send': 30.0, 'to': '0001 '}],
+            "0001":[{'received':500.0, 'from': '0002'},{'received':10.0, 'from': '0002'},{'send':5.0, 'to': '0002'}]
+                }
+# I used a nested dictionary to store all the computed transactions
+history_balance = {"0002":{"transaction":[50.0, -30.0]},
+                "0001":{"transaction":[500.0, 10.0, -5.0]}
+                }
+# I used a nested dictionary to store all the account information
+account_info = {"0002":{"name":"Nikolas", "age":"18", "sex": "M", },
+                "0001":{"name":"Claire", "age":"34", "sex": "F", }
+                 }
+
+# Just for UI purposes
+def horizontal_line():
+    print(" ──────────────────────────────────────────────────────────────────────────────────────────")
+
+# A function to view the menu of commands
+def display_options():
+    print("""
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+                                        MR. CRABS BANK                
+ ──────────────────────────────────────────────────────────────────────────────────────────
+        Welcome!                                                             [9] Exit
+        Choose a Command:                                                                            
+                                    [1] Display All Accounts
+                                    [2] Open an Account       
+                                    [3] Update an Account
+                                    [4] Close an Account
+                                    [5] Search Account
+                                    [6] Send Money
+                                    [7] Cash In
+                                    [8] Cash Out
+                                    
+ ──────────────────────────────────────────────────────────────────────────────────────────
+    """)
+
+# A function that displays the account information and balance of the clients and sorts them
+# by the users input of choice: If its by account number, name, age, or default.
+def display_accounts():
+    print("""
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+                                        MR. CRABS BANK                
+ ──────────────────────────────────────────────────────────────────────────────────────────
+                                Customers Account Information 
+        Sort by:
+                                    [1] Account Number
+                                    [2] Name
+                                    [3] Age
+                                    [4] Default  
+
+ ──────────────────────────────────────────────────────────────────────────────────────────                          
+ """)
+    option = input("\t▶▶▶ ")
+    print("""
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+                                        MR. CRABS BANK                
+ ──────────────────────────────────────────────────────────────────────────────────────────
+                                Customers Account Information            """)
+    if option == '1':
+        accountNumberSort = dict(sorted(account_info.items()))
+        for num, info in accountNumberSort.items():
+            print("\t\t◉ Account Number:", num)
+            for key in info:
+                print("\t\t\t",key.capitalize(), ":", info[key])
+            print("\t\t\t Balance:",float(sum(history_balance[num]['transaction'])))
+    elif option == '2':
+        nameSort = dict(sorted(account_info.items(), key=lambda x: x[1]["name"]))
+        for num, info in nameSort.items():
+            print("\t\t◉ Account Number:", num)
+            for key in info:
+                print("\t\t\t",key.capitalize(), ":", info[key])
+            print("\t\t\t Balance:", float(sum(history_balance[num]['transaction'])))
+    elif option == '3':
+        ageSort = dict(sorted(account_info.items(), key=lambda x: x[1]["age"]))
+        for num, info in ageSort.items():
+            print("\t\t◉ Account Number:", num)
+            for key in info:
+                print("\t\t\t",key.capitalize(), ":", info[key])
+            print("\t\t\t Balance:", float(sum(history_balance[num]['transaction'])))
+    elif option == '4':
+        for num, info in account_info.items():
+            print("\t\t◉ Account Number:", num)
+            for key in info:
+                print("\t\t\t",key.capitalize(), ":", info[key])
+            print("\t\t\t Balance:", float(sum(history_balance[num]['transaction'])))
+    else:
+        print("\t\t\tInvalid Input. Please Try Again.")
+        horizontal_line()
+
+# A function that asks them their information and adds them to the database or the dictionary.
+def register():
+    print("""
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+                                        MR. CRABS BANK                
+ ──────────────────────────────────────────────────────────────────────────────────────────
+                                     Register Information            """)
+    name = input("\t▶▶▶ Name: ")
+    age = input("\t▶▶▶ Age: ")
+    sex = input("\t▶▶▶ Sex: ")
+    num = input("\t▶▶▶ Account Number: ")
+    if num in account_info:
+        print("\t\tAccount Number is Taken")
+    else:
+        history[num] = []
+        history_balance[num] = {"transaction": []}
+        account_info[num] = {'name':name.capitalize(), 'age':age, 'sex':sex.capitalize()}
+
+        print("\tSuccessfully Registered")
+    print()
+    horizontal_line()
+
+# A function that updates the clients information
+def update():
+    print("""
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+                                        MR. CRABS BANK                
+ ──────────────────────────────────────────────────────────────────────────────────────────
+                                      Update Information 
+                                                 
+                                    [1] Name
+                                    [2] Age
+                                    [3] Sex        """)
+    accNum = input("\t▶▶▶ Enter Account Number: ")
+    if accNum in account_info:
+        print('\t\tModify Information of',account_info[accNum]['name'])
+        option = input("\t▶▶▶ Enter information that needs to be updated: ")
+        if option == '1':
+            newName = input("\t▶▶▶ Enter New Name: ")
+            account_info[accNum]['name'] = newName
+        elif option == '2':
+            newAge = input("\t▶▶▶ Enter New Age: ")
+            account_info[accNum]['age'] = newAge
+        elif option == '3':
+            newSex = input("\t▶▶▶ Enter New Sex: ")
+            account_info[accNum]['sex'] = newSex
+        else:
+            print("Invalid Option. Please Try Again")
+        print("\t\tSuccessfully Updated")
+    else:
+        print("\t\tInvalid. Please input a registered account number")
+    print()
+    horizontal_line()
+
+# A function that deletes a user by using the pop method.
+def delete_account():
+    print("""
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+                                        MR. CRABS BANK                
+ ──────────────────────────────────────────────────────────────────────────────────────────
+                                       Close an Account            """)
+    accNum = input("\t▶▶▶ Enter account number: ")
+    if accNum in account_info:
+        yrn = input(f"\t\tWould you like to proceed for deletion? (press y or n) "
+                    f"\n\t\tAccount Number:{accNum} | Name: {account_info[accNum]['name']} | Balance: {float(sum(history_balance[accNum]['transaction']))}"
+                    f"\n\t▶▶▶ ")
+        if yrn == 'y':
+            print("\t\tSuccessfully deleted")
+            account_info.pop(accNum)
+        elif yrn == 'n':
+            print("\t\tDiscarding deletion")
+        else:
+            print("\t\tInvalid command")
+    else:
+        print("\t\tInvalid Account Number")
+    print()
+    horizontal_line()
+
+# A function that search's a user and show them their personal information, available balance and transaction history
+def search():
+    print("""
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+                                        MR. CRABS BANK                
+ ──────────────────────────────────────────────────────────────────────────────────────────
+                                      Search an Account            """)
+    accNum = input("\t▶▶▶ Enter account number: ")
+    print("\t\t────────────────────────────────────────────────────────────────────────────")
+    if accNum in account_info:
+        print("\t\t◉ Account Number:", accNum)
+        for key, value in account_info[accNum].items():
+            print("\t\t\t",key.capitalize(), ":", value)
+        print("\t\t\t Balance:", float(sum(history_balance[accNum]['transaction'])))
+        print("\t\t────────────────────────────────────────────────────────────────────────────")
+        print("\t\t\t\t\t\t\t\t\t Transaction History: ")
+        for num in history[accNum]:
+            print("\t\t────────────────────────────────────────────────────────────────────────────")
+            for key, value in num.items():
+                print(f"\t\t\t\t\t\t\t\t\t  {key.capitalize():8} : {value}")
+        print("\t\t────────────────────────────────────────────────────────────────────────────")
+
+    else:
+        print("\t\tInvalid Account Number ")
+    print()
+    horizontal_line()
+
+# a function that transfers money to another user.
+def send_money():
+    print("""
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+                                        MR. CRABS BANK                
+ ──────────────────────────────────────────────────────────────────────────────────────────
+                                          Send Money  """)
+    accNum = input("\t▶▶▶ Enter account number: ")
+    if accNum in account_info:
+        print("\t\tWelcome to Express Send")
+        toaccount = input("\t▶▶▶ Enter account number to send money: ")
+        if toaccount in account_info:
+            print(f"\t\tAvailable Balance: PHP {sum(history_balance[accNum]['transaction'])}")
+            amount = float(input("\t▶▶▶ Enter Amount to Send: "))
+            if amount <= sum(history_balance[accNum]['transaction']):
+                print("\n\t───────────────────────────────────────────────")
+                print(f"\t\tFrom: {accNum} / {account_info[accNum]['name']}")
+                print(f"\t\tTo: {toaccount} / {account_info[toaccount]['name']}")
+                print(f"\t\tAmount To send: {amount}")
+                print("\t───────────────────────────────────────────────")
+                print("\n\t▶▶▶ Would you like to proceed? (y/n) ")
+                confirmation = input("\t▶▶▶ ")
+                if confirmation.lower() == 'y':
+                    sender = history_balance[accNum]['transaction']
+                    sender.append(-amount)
+
+                    recipient = history_balance[toaccount]['transaction']
+                    recipient.append(amount)
+
+                    history[accNum].append({'send': amount, "to": toaccount})
+                    history[toaccount].append({'received': amount, 'from': accNum})
+                    print("\tSuccessfully Sent")
+                elif confirmation.lower() == 'n':
+                    print("\t\tDiscarding Transaction")
+                else:
+                    print("\t\tInvalid Input")
+            else:
+                print("\t\tInsufficient Balance")
+        else:
+            print("\t\tInvalid Account Number")
+    else:
+         print("\t\tInvalid Account Number")
+
+# a function that deposits money to its user.
+def cash_in():
+    print("""
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+                                        MR. CRABS BANK                
+ ──────────────────────────────────────────────────────────────────────────────────────────
+                                            Cash In   """)
+    accNum = input("\t▶▶▶ Enter account number: ")
+    if accNum in account_info:
+        amount = float(input("\t▶▶▶ Enter Amount: "))
+        print("\n\t───────────────────────────────────────────────")
+        print(f"\t\tFrom: Authorized Branch")
+        print(f"\t\tTo: {accNum} / {account_info[accNum]['name']}")
+        print(f"\t\tAmount To Cash In: {amount}")
+        print("\t───────────────────────────────────────────────")
+        print("\n\t▶▶▶ Would you like to proceed? (y/n) ")
+        confirmation = input("\t▶▶▶ ")
+        if confirmation.lower() == 'y':
+            recipient = history_balance[accNum]['transaction']
+            recipient.append(amount)
+
+            history[accNum].append({'cash in': amount, 'from': 'Authorized Branch'})
+            print("\tSuccessfully Cashed In")
+        elif confirmation.lower() == 'n':
+            print("Discarding Transaction")
+    else:
+        print("\t\tInvalid Account Number")
+
+# A function that cash out the money of its user.
+def cash_out():
+    print("""
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+                                        MR. CRABS BANK                
+ ──────────────────────────────────────────────────────────────────────────────────────────
+                                            Cash Out  """)
+    accNum = input("\t▶▶▶ Enter account number: ")
+    if accNum in account_info:
+        print(f"\t\tAvailable Balance: PHP {sum(history_balance[accNum]['transaction'])}")
+        amount = float(input("\t▶▶▶ Enter Amount: "))
+        if amount <= sum(history_balance[accNum]['transaction']):
+            print("\n\t───────────────────────────────────────────────")
+            print(f"\t\tFrom: {accNum} / {account_info[accNum]['name']}")
+            print(f"\t\tTo: Authorized Branch")
+            print(f"\t\tAmount to Cash Out: {amount}")
+            print("\t───────────────────────────────────────────────")
+            print("\n\t▶▶▶ Would you like to proceed? (y/n) ")
+            confirmation = input("\t▶▶▶ ")
+            if confirmation.lower() == 'y':
+                recipient = history_balance[accNum]['transaction']
+                recipient.append(-amount)
+
+                history[accNum].append({'cash out': amount, 'To': 'Authorized Branch'})
+                print("\t\tSuccessfully Cashed Out")
+            elif confirmation.lower() == 'n':
+                print("\t\tDiscarding Transaction")
+        else:
+            print("\t\tInsufficient Balance")
+    else:
+        print("\t\tInvalid Account Number")
+
+# The main function that calls the command functions.
+def main():
+    while True:
+        display_options()
+        option = input("\t▶▶▶ ")
+        if option == '1':
+            display_accounts()
+        elif option == '2':
+            register()
+        elif option == '3':
+            update()
+        elif option == '4':
+            delete_account()
+        elif option == '5':
+            search()
+        elif option == '6':
+            send_money()
+        elif option == '7':
+            cash_in()
+        elif option == '8':
+            cash_out()
+        elif option == '9':
+            print('\n ────────────────────────────────────Program Terminated────────────────────────────────────')
+            break
+
+main()
