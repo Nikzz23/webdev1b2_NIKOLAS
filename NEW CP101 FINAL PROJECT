@@ -113,7 +113,7 @@ def register():
         history_balance[num] = {"transaction": []}
         account_info[num] = {'name':name.capitalize(), 'age':age, 'sex':sex.capitalize()}
 
-        print("\tSuccessfully Registered")
+        print("\t\tSuccessfully Registered")
     print()
     horizontal_line()
 
@@ -166,6 +166,8 @@ def delete_account():
         if yrn.lower() == 'y':
             print("\t\tSuccessfully deleted")
             account_info.pop(accNum)
+            history.pop(accNum)
+            history_balance.pop(accNum)
         elif yrn.lower() == 'n':
             print("\t\tDiscarding deletion")
         else:
@@ -235,7 +237,7 @@ def send_money():
 
                     history[accNum].append({'send': amount, "to": toaccount})
                     history[toaccount].append({'received': amount, 'from': accNum})
-                    print("\tSuccessfully Sent")
+                    print("\t\tSuccessfully Sent")
                 elif confirmation.lower() == 'n':
                     print("\t\tDiscarding Transaction")
                 else:
@@ -270,9 +272,11 @@ def cash_in():
             recipient.append(amount)
 
             history[accNum].append({'cash in': amount, 'from': 'Authorized Branch'})
-            print("\tSuccessfully Cashed In")
+            print("\t\tSuccessfully Cashed In")
         elif confirmation.lower() == 'n':
-            print("Discarding Transaction")
+            print("\t\tDiscarding Transaction")
+        else:
+            print("\t\tInvalid Command")
     else:
         print("\t\tInvalid Account Number")
 
@@ -304,6 +308,8 @@ def cash_out():
                 print("\t\tSuccessfully Cashed Out")
             elif confirmation.lower() == 'n':
                 print("\t\tDiscarding Transaction")
+            else:
+                print("\t\tInvalid Input")
         else:
             print("\t\tInsufficient Balance")
     else:
@@ -333,5 +339,7 @@ def main():
         elif option == '9':
             print('\n ────────────────────────────────────Program Terminated────────────────────────────────────')
             break
+        else:
+            print('\t\tInvalid Command')
 
 main()
